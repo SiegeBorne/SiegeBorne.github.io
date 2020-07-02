@@ -3,24 +3,93 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | SiegeBorne</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>SiegeBorne - Home</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>
+    <link rel="stylesheet" href="TemplateData/css/main.css" />
     <script src="Build/UnityLoader.js"></script>
     <script>
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Build.json", {onProgress: UnityProgress});
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Build.json", {});
     </script>
     <script data-ad-client="ca-pub-2260646756008343" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <noscript><link rel="stylesheet" href="TemplateData/css/noscript.css" /></noscript>
   </head>
-  <body>
-    <div class="webgl-content">
-      <div id="unityContainer" style="width: 960px; height: 600px"></div>
-      <div class="footer">
-        <div class="webgl-logo"></div>
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-        <div class="title">SiegeBorne</div>
-      </div>
+  <body class="is-preload">
+  <section id="header">
+  <div class="inner">
+    <h1>Welcome to the home page for <strong>SiegeBorne</strong>,<br />
+    a realtime strategy game where you get behind the helm of a trebuchet.</h1>
+    <p>Fight against the other team, and work alongside the 100 computer players<br />
+    to bring down the opposing tower, scoring major points!</p>
+    <ul class="actions special">
+    <li><a href="#one" class="button scrolly">Play the game!</a></li>
+    </ul>
+  </div>
+  </section>
+
+  <section id="one" class="main style1">
+  <div class="container">
+    <div>
+    <div id="unityContainer" style="center width: 960px; height: 600px"></div>
+    <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
     </div>
+    <div class="row">
+    </div>
+  </div>
+  </section>
+
+  <section id="two" class="main style2 special">
+  <div class="container">
+    <div>
+    <header class="major">
+    <h2>How to Play</h2>
+    </header>
+    <p>Movement: WASD or Arrow Keys</p>
+    <p>Zoom In/Out: Scroll Wheel</p>
+    <p>Rotate Camera: Press and hold Right Mouse Button, then move Mouse left and right</p>
+    <p>Fire: Press and hold Left Mouse Button to charge, release to fire</p>
+    <p>Minimap: M</p>
+    </div>
+  </div>
+  </section>
+
+  <section id="three" class="main style1 special">
+  <div class="container">
+    <header class="major">
+    <h2>Red vs. Blue</h2>
+    </header>
+    <p>When creating a room, you'll be auto-assigned to competing teams, alternating between red and blue. The enemy tower is on the other side of the map, so good luck getting there without any of the enemy players noticing. However, if you get many bots ahead of you, you might be able to gradually fight your way to their home base.</p>
+  </div>
+  </section>
+
+  <section id="four" class="main style2 special">
+  <div class="container">
+    <header class="major">
+    <h2>Upgrades</h2>
+    </header>
+    <p>SiegeBorne has an upgrade system, which allows you to increase your trebuchet's stats as you level up. Here are the stats along with their corresponding abilities:</p>
+    <p>Max Health: Increases how much total damage you can take before being destroyed.</p>
+    <p>Attack: Increases how much damage you will inflict to enemies and towers.</p>
+    <p>Defense: Decreases how much damage you will take from enemies and towers.</p>
+    <p>Reload: Decreases the time it takes to fire again after firing a rock.</p>
+    <p>Speed: Increases how fast your trebuchet moves.</p>
+    <p># Shots: Increases how many rocks you can fire at once.</p>
+    <p>Flame Shot: Adds flame to your shots. When the rocks hit enemies and towers, the flame shot sets them ablaze, causing damage over time.</p>
+  </div>
+  </section>
+
+  <section id="footer" class="footer">
+  <ul class="copyright">
+    <li>&copy; SiegeBorne, Matt Graves</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+  </ul>
+  </section>
+
+  <script src="TemplateData/js/jquery.min.js"></script>
+  <script src="TemplateData/js/jquery.scrolly.min.js"></script>
+  <script src="TemplateData/js/browser.min.js"></script>
+  <script src="TemplateData/js/breakpoints.min.js"></script>
+  <script src="TemplateData/js/util.js"></script>
+  <script src="TemplateData/js/main.js"></script>
   </body>
 </html>
