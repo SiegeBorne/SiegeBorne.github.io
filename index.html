@@ -3,92 +3,76 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>SiegeBorne - Home</title>
+    <title>Unity WebGL Player | SiegeBorne</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-    <link rel="stylesheet" href="TemplateData/css/main.css" />
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Build.json", {});
-    </script>
-    <noscript><link rel="stylesheet" href="TemplateData/css/noscript.css" /></noscript>
   </head>
-  <body class="is-preload">
-  <section id="header">
-  <div class="inner">
-    <h1>Welcome to the home page for <strong>SiegeBorne</strong>,<br />
-    a realtime strategy game where you get behind the helm of a trebuchet.</h1>
-    <p>Fight against the other team, and work alongside computer players<br />
-    to bring down the opposing tower, scoring major points!</p>
-    <ul class="actions special">
-    <li><a href="#one" class="button scrolly">Play the game!</a></li>
-    </ul>
-  </div>
-  </section>
-
-  <section id="one" class="main style1">
-  <div class="container">
-    <div>
-    <div id="unityContainer" style="center width: 960px; height: 600px"></div>
-    <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-mobile-warning">
+        WebGL builds are not supported on mobile devices.
+      </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">SiegeBorne</div>
+      </div>
     </div>
-    <div class="row">
-    </div>
-  </div>
-  </section>
+    <script>
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/WebBuild.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/WebBuild.data.gz",
+        frameworkUrl: buildUrl + "/WebBuild.framework.js.gz",
+        codeUrl: buildUrl + "/WebBuild.wasm.gz",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Sola Fide Games",
+        productName: "SiegeBorne",
+        productVersion: "1.0",
+      };
 
-  <section id="two" class="main style2 special">
-  <div class="container">
-    <div>
-    <header class="major">
-    <h2>How to Play</h2>
-    </header>
-    <p>Movement: WASD or Arrow Keys</p>
-    <p>Zoom In/Out: Scroll Wheel</p>
-    <p>Rotate Camera: Press and hold Right Mouse Button, then move Mouse left and right</p>
-    <p>Fire: Press and hold Left Mouse Button to charge, release to fire</p>
-    <p>Minimap: M</p>
-    </div>
-  </div>
-  </section>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var mobileWarning = document.querySelector("#unity-mobile-warning");
 
-  <section id="three" class="main style1 special">
-  <div class="container">
-    <header class="major">
-    <h2>Red vs. Blue</h2>
-    </header>
-    <p>When creating a room, you'll be auto-assigned to competing teams, alternating between red and blue. The enemy tower is on the other side of the map, so good luck getting there without any of the enemy players noticing. However, if you get many bots ahead of you, you might be able to gradually fight your way to their home base.</p>
-  </div>
-  </section>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        config.devicePixelRatio = 1;
+        mobileWarning.style.display = "block";
+        setTimeout(() => {
+          mobileWarning.style.display = "none";
+        }, 5000);
+      } else {
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+      loadingBar.style.display = "block";
 
-  <section id="four" class="main style2 special">
-  <div class="container">
-    <header class="major">
-    <h2>Upgrades</h2>
-    </header>
-    <p>SiegeBorne has an upgrade system, which allows you to increase your trebuchet's stats as you level up. Here are the stats along with their corresponding abilities:</p>
-    <p>Max Health: Increases how much total damage you can take before being destroyed.</p>
-    <p>Attack: Increases how much damage you will inflict to enemies and towers.</p>
-    <p>Defense: Decreases how much damage you will take from enemies and towers.</p>
-    <p>Reload: Decreases the time it takes to fire again after firing a rock.</p>
-    <p>Speed: Increases how fast your trebuchet moves.</p>
-    <p># Shots: Increases how many rocks you can fire at once.</p>
-    <p>Flame Shot: Adds flame to your shots. When the rocks hit enemies and towers, the flame shot sets them ablaze, causing damage over time.</p>
-  </div>
-  </section>
-
-  <section id="footer" class="footer">
-  <ul class="copyright">
-    <li>&copy; SiegeBorne, Matt Graves</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-  </ul>
-  </section>
-
-  <script src="TemplateData/js/jquery.min.js"></script>
-  <script src="TemplateData/js/jquery.scrolly.min.js"></script>
-  <script src="TemplateData/js/browser.min.js"></script>
-  <script src="TemplateData/js/breakpoints.min.js"></script>
-  <script src="TemplateData/js/util.js"></script>
-  <script src="TemplateData/js/main.js"></script>
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>
